@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account — Secure Signup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-shell">
+
+    <!-- LEFT: brand + verification seal -->
+    <aside class="brand-panel">
+        <div class="brand-mark">
+            <span class="mark-dot"></span>
+            <!-- Change "YourCompany" to your actual company name -->
+            <span>Your<em>Company</em></span>
+        </div>
+
+        <div class="seal-stage">
+            <div class="seal-graphic">
+                <div class="seal-ring"></div>
+                <div class="seal-ring inner"></div>
+                <svg class="seal-progress" viewBox="0 0 168 168">
+                    <circle id="seal-arc" cx="84" cy="84" r="76"></circle>
+                </svg>
+                <div class="seal-core" id="seal-core">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/></svg>
+                </div>
+            </div>
+            <div class="seal-caption">
+                <p class="eyebrow">Identity Verification</p>
+                <h1>Every account is sealed with a one-time code.</h1>
+                <p>We confirm your email before anything else touches your account — no shortcuts, no guessing.</p>
+            </div>
+        </div>
+
+        <div class="brand-footer">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+            256-bit encrypted &middot; OTP expires in 10 minutes
+        </div>
+    </aside>
+
+    <!-- RIGHT: signup form -->
+    <main class="form-panel">
+        <div class="form-card">
+            <p class="kicker">Step <span id="step-count">1</span> of 2</p>
+            <h2>Create your account</h2>
+            <p class="subtitle">Already registered? <a href="login.html">Sign in instead</a></p>
+
+            <div class="step-track">
+                <div class="step is-active" id="step1">
+                    <div class="step-num">1</div>
+                    <div class="step-label">Details</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step2">
+                    <div class="step-num">2</div>
+                    <div class="step-label">Verify</div>
+                </div>
+            </div>
+
+            <form id="signup-form" novalidate>
+
+                <div class="input-group">
+                    <label for="name">Full name</label>
+                    <div class="field-wrap">
+                        <input type="text" id="name" placeholder="John Doe" autocomplete="name" maxlength="100" required>
+                    </div>
+                </div>
+
+                <!-- NEW: backend requires a username -->
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <div class="field-wrap">
+                        <input type="text" id="username" placeholder="john.doe" autocomplete="username" maxlength="30" required>
+                    </div>
+                    <div class="field-hint" id="username-hint"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email address</label>
+                    <div class="email-row">
+                        <div class="field-wrap">
+                            <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+                        </div>
+                        <button type="button" id="send-otp-btn" class="btn-ghost">Send code</button>
+                    </div>
+                    <div class="field-hint" id="email-hint"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="field-wrap">
+                        <input type="password" id="password" class="has-icon-right" placeholder="At least 8 characters" autocomplete="new-password" required>
+                        <button type="button" class="eye-toggle" data-target="password" aria-label="Show password">
+                            <svg class="eye-on" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.4 21.4 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.4 21.4 0 01-2.66 3.79M14.12 14.12a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                    <div class="strength-meter">
+                        <i data-bar="1"></i><i data-bar="2"></i><i data-bar="3"></i><i data-bar="4"></i>
+                    </div>
+                    <div class="strength-label" id="strength-label">Use 8+ characters with a number and a symbol</div>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirm password</label>
+                    <div class="field-wrap">
+                        <input type="password" id="confirm-password" class="has-icon-right" placeholder="Re-enter your password" autocomplete="new-password" required>
+                        <button type="button" class="eye-toggle" data-target="confirm-password" aria-label="Show password">
+                            <svg class="eye-on" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <svg class="eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.94 10.94 0 0112 19c-7 0-11-7-11-7a21.4 21.4 0 015.06-5.94M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 7 11 7a21.4 21.4 0 01-2.66 3.79M14.12 14.12a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                        </button>
+                    </div>
+                    <div class="field-hint" id="confirm-hint"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="otp">6-digit verification code</label>
+                    <div class="otp-row">
+                        <input type="text" id="otp" inputmode="numeric" maxlength="6" placeholder="••••••" required>
+                    </div>
+                    <div class="field-hint" id="otp-hint">Sent to your email once you tap "Send code"</div>
+                </div>
+
+                <button type="submit" id="verify-otp-btn" class="btn-primary">Verify &amp; create account</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toast-text"></span></div>
+
+<script src="script.js"></script>
+</body>
+</html>
